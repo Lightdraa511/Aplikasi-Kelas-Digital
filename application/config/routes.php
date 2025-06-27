@@ -56,3 +56,12 @@ $route['dashboard'] = 'Dashboard';
 $route['change-password'] = 'Auth/change_password';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// User Management Routes (Admin only)
+$route['admin/users'] = 'Admin/Users';
+$route['admin/users/create'] = 'Admin/Users/create';
+$route['admin/users/edit/(:num)'] = 'Admin/Users/edit/$1';
+$route['admin/users/delete/(:num)'] = 'Admin/Users/delete/$1';
+$route['admin/users/toggle/(:num)'] = 'Admin/Users/toggle_status/$1';
+$route['admin/users/reset-password/(:num)'] = 'Admin/Users/reset_password/$1';
+

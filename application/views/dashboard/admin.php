@@ -90,13 +90,13 @@ $this->load->view('templates/sidebar', ['user' => $user]);
               </h3>
             </div>
             <div class="card-body">
-              <div class="row">
+			<div class="row">
                 <div class="col-6">
-                  <a href="#" class="btn btn-primary btn-block mb-2">
-                    <i class="fas fa-user-plus"></i> Tambah Guru
+                  <a href="<?= base_url('admin/users/create') ?>" class="btn btn-primary btn-block mb-2">
+                    <i class="fas fa-user-plus"></i> Tambah Pengguna
                   </a>
-                  <a href="#" class="btn btn-success btn-block">
-                    <i class="fas fa-user-graduate"></i> Tambah Siswa
+                  <a href="<?= base_url('admin/users') ?>" class="btn btn-success btn-block">
+                    <i class="fas fa-users"></i> Kelola Pengguna
                   </a>
                 </div>
                 <div class="col-6">

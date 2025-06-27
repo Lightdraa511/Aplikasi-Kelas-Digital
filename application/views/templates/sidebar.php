@@ -40,7 +40,7 @@
           <!-- Admin Menu -->
           <li class="nav-header">ADMINISTRATOR</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?= base_url('admin/users') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'users') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>Kelola Pengguna</p>
             </a>
