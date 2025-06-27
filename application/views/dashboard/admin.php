@@ -80,6 +80,24 @@ $this->load->view('templates/sidebar', ['user' => $user]);
 
       <!-- Main row -->
       <div class="row">
+		<!-- Active Period Info -->
+		<div class="row mb-3">
+        <div class="col-12">
+          <?php if (isset($stats['active_period']) && $stats['active_period']): ?>
+            <div class="alert alert-info">
+              <h5><i class="icon fas fa-info"></i> Periode Aktif</h5>
+              Sistem menggunakan periode <strong><?= $stats['active_period']->tahun_ajaran ?> - <?= $stats['active_period']->semester ?></strong>
+            </div>
+          <?php else: ?>
+            <div class="alert alert-warning">
+              <h5><i class="icon fas fa-exclamation-triangle"></i> Tidak Ada Periode Aktif</h5>
+              <a href="<?= base_url('admin/periode') ?>" class="btn btn-warning btn-sm">
+                <i class="fas fa-calendar-plus"></i> Kelola Periode
+              </a>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
         <!-- Quick Actions -->
         <div class="col-md-6">
           <div class="card">
@@ -91,7 +109,7 @@ $this->load->view('templates/sidebar', ['user' => $user]);
             </div>
             <div class="card-body">
 			<div class="row">
-                <div class="col-6">
+			<div class="col-6">
                   <a href="<?= base_url('admin/users/create') ?>" class="btn btn-primary btn-block mb-2">
                     <i class="fas fa-user-plus"></i> Tambah Pengguna
                   </a>
@@ -100,11 +118,11 @@ $this->load->view('templates/sidebar', ['user' => $user]);
                   </a>
                 </div>
                 <div class="col-6">
-                  <a href="#" class="btn btn-info btn-block mb-2">
-                    <i class="fas fa-calendar-plus"></i> Periode Baru
+                  <a href="<?= base_url('admin/periode/create') ?>" class="btn btn-info btn-block mb-2">
+                    <i class="fas fa-calendar-plus"></i> Tambah Periode
                   </a>
-                  <a href="#" class="btn btn-warning btn-block">
-                    <i class="fas fa-download"></i> Export Data
+                  <a href="<?= base_url('admin/periode') ?>" class="btn btn-warning btn-block">
+                    <i class="fas fa-calendar-alt"></i> Kelola Periode
                   </a>
                 </div>
               </div>

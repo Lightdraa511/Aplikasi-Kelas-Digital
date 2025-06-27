@@ -65,3 +65,9 @@ $route['admin/users/delete/(:num)'] = 'Admin/Users/delete/$1';
 $route['admin/users/toggle/(:num)'] = 'Admin/Users/toggle_status/$1';
 $route['admin/users/reset-password/(:num)'] = 'Admin/Users/reset_password/$1';
 
+// Periode Akademik Routes (Admin only)
+$route['admin/periode'] = 'Admin/Periode_akademik';
+$route['admin/periode/create'] = 'Admin/Periode_akademik/create';
+$route['admin/periode/edit/(:num)'] = 'Admin/Periode_akademik/edit/$1';
+$route['admin/periode/activate/(:num)'] = 'Admin/Periode_akademik/activate/$1';
+$route['admin/periode/delete/(:num)'] = 'Admin/Periode_akademik/delete/$1';

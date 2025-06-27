@@ -43,7 +43,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?= base_url('admin/periode') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'periode') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>Periode Akademik</p>
             </a>
