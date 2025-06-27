@@ -131,9 +131,7 @@ $this->load->view('templates/sidebar', ['user' => $user]);
                 
                 <dt class="col-sm-4">Database:</dt>
                 <dd class="col-sm-8">MySQL 5.7+</dd>
-                
-                <dt class="col-sm-4">Template:</dt>
-                <dd class="col-sm-8">AdminLTE 3.2.0</dd>
+
               </dl>
             </div>
           </div>

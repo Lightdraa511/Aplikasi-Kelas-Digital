@@ -7,7 +7,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= base_url('dashboard') ?>" class="brand-link">
-      <img src="https://via.placeholder.com/33x33/007bff/ffffff?text=KD" alt="Kelas Digital" class="brand-image img-circle elevation-3">
+      <img src="https://i.pinimg.com/474x/f8/a5/7c/f8a57c4d62b9eb10ebcb3d46aeb29bd0.jpg" alt="Kelas Digital" class="brand-image img-circle elevation-3">
       <span class="brand-text font-weight-light"><b>Kelas</b>Digital</span>
     </a>
 
@@ -15,9 +15,6 @@
     <div class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="https://via.placeholder.com/35x35/28a745/ffffff?text=<?= strtoupper(substr($user['nama_lengkap'], 0, 1)) ?>" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
           <a href="#" class="d-block"><?= $user['nama_lengkap'] ?></a>
           <small class="text-light"><?= ucwords(str_replace('_', ' ', $user['role'])) ?></small>
