@@ -71,3 +71,20 @@ $route['admin/periode/create'] = 'Admin/Periode_akademik/create';
 $route['admin/periode/edit/(:num)'] = 'Admin/Periode_akademik/edit/$1';
 $route['admin/periode/activate/(:num)'] = 'Admin/Periode_akademik/activate/$1';
 $route['admin/periode/delete/(:num)'] = 'Admin/Periode_akademik/delete/$1';
+
+// Kelas Management Routes
+// Admin (monitoring only)
+$route['admin/kelas'] = 'Admin/Kelas';
+
+// Guru (full management)
+$route['guru/kelas'] = 'Guru/Kelas';
+$route['guru/kelas/create'] = 'Guru/Kelas/create';
+$route['guru/kelas/edit/(:num)'] = 'Guru/Kelas/edit/$1';
+$route['guru/kelas/toggle/(:num)'] = 'Guru/Kelas/toggle_status/$1';
+$route['guru/kelas/students/(:num)'] = 'Guru/Kelas/manage_students/$1';
+$route['guru/kelas/add-student'] = 'Guru/Kelas/add_student';
+$route['guru/kelas/remove-student'] = 'Guru/Kelas/remove_student';
+
+// Siswa (view only)
+$route['siswa/kelas'] = 'Siswa/Kelas';
+$route['siswa/kelas/detail/(:num)'] = 'Siswa/Kelas/detail/$1';

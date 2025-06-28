@@ -37,26 +37,46 @@ class Dashboard_model extends CI_Model {
 		return $stats;
 	}
     
-    // Guru Dashboard Stats
-    public function get_guru_stats($guru_id) {
-        $stats = array();
-        
-        // Total kelas diajar (akan diimplementasi nanti)
-        $stats['total_kelas'] = 0;
-        $stats['total_tugas_aktif'] = 0;
-        
-        return $stats;
-    }
-    
-    // Siswa Dashboard Stats  
-    public function get_siswa_stats($siswa_id) {
-        $stats = array();
-        
-        // Total kelas diikuti (akan diimplementasi nanti)
-        $stats['total_kelas'] = 0;
-        $stats['tugas_mendatang'] = 0;
-        $stats['tugas_terlambat'] = 0;
-        
-        return $stats;
-    }
+	public function get_guru_stats($guru_id) {
+		$stats = array();
+		
+		// Total kelas diajar
+		$this->db->where('guru_id', $guru_id);
+		$this->db->where('is_active', 1);
+		$stats['total_kelas'] = $this->db->count_all_results('kelas');
+		
+		// Total siswa (unique students across all classes)
+		$this->db->select('COUNT(DISTINCT ks.siswa_id) as total');
+		$this->db->from('kelas_siswa ks');
+		$this->db->join('kelas k', 'k.id = ks.kelas_id');
+		$this->db->where('k.guru_id', $guru_id);
+		$this->db->where('k.is_active', 1);
+		$result = $this->db->get()->row();
+		$stats['total_siswa'] = $result ? $result->total : 0;
+		
+		// Total tugas aktif (akan digunakan di Phase 5)
+		$stats['total_tugas_aktif'] = 0;
+		
+		return $stats;
+	}
+	
+	// UPDATE method get_siswa_stats():
+	public function get_siswa_stats($siswa_id) {
+		$stats = array();
+		
+		// Total kelas diikuti
+		$this->db->select('COUNT(ks.kelas_id) as total');
+		$this->db->from('kelas_siswa ks');
+		$this->db->join('kelas k', 'k.id = ks.kelas_id');
+		$this->db->where('ks.siswa_id', $siswa_id);
+		$this->db->where('k.is_active', 1);
+		$result = $this->db->get()->row();
+		$stats['total_kelas'] = $result ? $result->total : 0;
+		
+		// Tugas statistics (akan digunakan di Phase 5)
+		$stats['tugas_mendatang'] = 0;
+		$stats['tugas_terlambat'] = 0;
+		
+		return $stats;
+	}
 }

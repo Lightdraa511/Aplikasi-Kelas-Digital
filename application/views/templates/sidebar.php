@@ -49,6 +49,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('admin/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-chalkboard"></i>
+              <p>Monitoring Kelas</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>Laporan</p>
@@ -59,7 +65,7 @@
           <!-- Guru Menu -->
           <li class="nav-header">GURU</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?= base_url('guru/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'guru' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-chalkboard"></i>
               <p>Kelola Kelas</p>
             </a>
@@ -81,7 +87,7 @@
           <!-- Siswa Menu -->
           <li class="nav-header">SISWA</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?= base_url('siswa/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'siswa' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-book"></i>
               <p>Kelas Saya</p>
             </a>

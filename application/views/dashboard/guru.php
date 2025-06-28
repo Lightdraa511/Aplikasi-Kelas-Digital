@@ -81,21 +81,21 @@ $this->load->view('templates/sidebar', ['user' => $user]);
               </h3>
             </div>
             <div class="card-body">
-              <div class="row">
+			<div class="row">
                 <div class="col-6">
-                  <a href="#" class="btn btn-primary btn-block mb-2">
+                  <a href="<?= base_url('guru/kelas/create') ?>" class="btn btn-primary btn-block mb-2">
                     <i class="fas fa-plus"></i> Buat Kelas
                   </a>
-                  <a href="#" class="btn btn-success btn-block">
-                    <i class="fas fa-tasks"></i> Buat Tugas
+                  <a href="<?= base_url('guru/kelas') ?>" class="btn btn-success btn-block">
+                    <i class="fas fa-chalkboard"></i> Kelola Kelas
                   </a>
                 </div>
                 <div class="col-6">
                   <a href="#" class="btn btn-info btn-block mb-2">
-                    <i class="fas fa-star"></i> Nilai Tugas
+                    <i class="fas fa-tasks"></i> Buat Tugas
                   </a>
                   <a href="#" class="btn btn-warning btn-block">
-                    <i class="fas fa-users"></i> Kelola Siswa
+                    <i class="fas fa-star"></i> Nilai Tugas
                   </a>
                 </div>
               </div>

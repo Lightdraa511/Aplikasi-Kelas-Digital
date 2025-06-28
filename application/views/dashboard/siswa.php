@@ -120,9 +120,8 @@ $this->load->view('templates/sidebar', ['user' => $user]);
         </div>
       </div>
 
-      <!-- Kelas Yang Diikuti -->
-      <div class="row">
-        <div class="col-12">
+        <!-- Kelas Yang Diikuti -->
+        <div class="col-md-6">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
@@ -131,16 +130,24 @@ $this->load->view('templates/sidebar', ['user' => $user]);
               </h3>
             </div>
             <div class="card-body">
-              <div class="text-center py-4">
-                <i class="fas fa-users fa-3x text-muted mb-3"></i>
-                <h5 class="text-muted">Belum terdaftar di kelas manapun</h5>
-                <p class="text-muted">Hubungi guru untuk mendaftarkan Anda ke kelas</p>
-              </div>
+              <?php if ($stats['total_kelas'] > 0): ?>
+                <div class="text-center">
+                  <h4 class="text-primary"><?= $stats['total_kelas'] ?></h4>
+                  <p class="text-muted">Kelas aktif</p>
+                  <a href="<?= base_url('siswa/kelas') ?>" class="btn btn-primary btn-sm">
+                    <i class="fas fa-eye"></i> Lihat Semua Kelas
+                  </a>
+                </div>
+              <?php else: ?>
+                <div class="text-center py-3">
+                  <i class="fas fa-info-circle fa-2x text-muted mb-2"></i>
+                  <p class="text-muted">Belum terdaftar di kelas manapun</p>
+                  <small class="text-muted">Hubungi guru untuk mendaftarkan Anda</small>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
         </div>
-      </div>
-
     </div>
   </section>
 </div>
