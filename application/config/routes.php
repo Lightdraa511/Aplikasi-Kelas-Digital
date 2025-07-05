@@ -88,3 +88,17 @@ $route['guru/kelas/remove-student'] = 'Guru/Kelas/remove_student';
 // Siswa (view only)
 $route['siswa/kelas'] = 'Siswa/Kelas';
 $route['siswa/kelas/detail/(:num)'] = 'Siswa/Kelas/detail/$1';
+
+// Tugas Routes - Guru
+$route['guru/tugas'] = 'Guru/Tugas';
+$route['guru/tugas/create'] = 'Guru/Tugas/create';
+$route['guru/tugas/detail/(:num)'] = 'Guru/Tugas/detail/$1';
+$route['guru/tugas/edit/(:num)'] = 'Guru/Tugas/edit/$1';
+$route['guru/tugas/grade/(:num)'] = 'Guru/Tugas/grade/$1';
+$route['guru/tugas/grade_simple'] = 'Guru/Tugas/grade_simple';
+
+// Tugas Routes - Siswa  
+$route['siswa/tugas'] = 'Siswa/Tugas';
+$route['siswa/tugas/detail/(:num)'] = 'Siswa/Tugas/detail/$1';
+$route['siswa/tugas/submit/(:num)'] = 'Siswa/Tugas/submit/$1';
+$route['siswa/tugas/download/(:any)'] = 'Siswa/Tugas/download/$1';

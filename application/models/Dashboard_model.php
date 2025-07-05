@@ -45,22 +45,28 @@ class Dashboard_model extends CI_Model {
 		$this->db->where('is_active', 1);
 		$stats['total_kelas'] = $this->db->count_all_results('kelas');
 		
-		// Total siswa (unique students across all classes)
-		$this->db->select('COUNT(DISTINCT ks.siswa_id) as total');
-		$this->db->from('kelas_siswa ks');
-		$this->db->join('kelas k', 'k.id = ks.kelas_id');
+		// Total tugas aktif
+		$this->db->select('COUNT(t.id) as total');
+		$this->db->from('tugas t');
+		$this->db->join('kelas k', 'k.id = t.kelas_id');
 		$this->db->where('k.guru_id', $guru_id);
-		$this->db->where('k.is_active', 1);
+		$this->db->where('t.status', 'published');
 		$result = $this->db->get()->row();
-		$stats['total_siswa'] = $result ? $result->total : 0;
+		$stats['total_tugas_aktif'] = $result ? $result->total : 0;
 		
-		// Total tugas aktif (akan digunakan di Phase 5)
-		$stats['total_tugas_aktif'] = 0;
+		// Submissions pending review
+		$this->db->select('COUNT(pt.id) as total');
+		$this->db->from('pengumpulan_tugas pt');
+		$this->db->join('tugas t', 't.id = pt.tugas_id');
+		$this->db->join('kelas k', 'k.id = t.kelas_id');
+		$this->db->where('k.guru_id', $guru_id);
+		$this->db->where('pt.nilai IS NULL');
+		$result = $this->db->get()->row();
+		$stats['pending_review'] = $result ? $result->total : 0;
 		
 		return $stats;
 	}
 	
-	// UPDATE method get_siswa_stats():
 	public function get_siswa_stats($siswa_id) {
 		$stats = array();
 		
@@ -73,10 +79,44 @@ class Dashboard_model extends CI_Model {
 		$result = $this->db->get()->row();
 		$stats['total_kelas'] = $result ? $result->total : 0;
 		
-		// Tugas statistics (akan digunakan di Phase 5)
-		$stats['tugas_mendatang'] = 0;
-		$stats['tugas_terlambat'] = 0;
+		// Tugas mendatang (deadline belum lewat, belum dikumpulkan)
+		$this->db->select('COUNT(t.id) as total');
+		$this->db->from('tugas t');
+		$this->db->join('kelas k', 'k.id = t.kelas_id');
+		$this->db->join('kelas_siswa ks', 'ks.kelas_id = k.id');
+		$this->db->where('ks.siswa_id', $siswa_id);
+		$this->db->where('t.status', 'published');
+		$this->db->where('t.deadline >', date('Y-m-d H:i:s'));
+		$this->db->where("t.id NOT IN (
+			SELECT tugas_id FROM pengumpulan_tugas WHERE siswa_id = $siswa_id
+		)");
+		$result = $this->db->get()->row();
+		$stats['tugas_mendatang'] = $result ? $result->total : 0;
+		
+		// Tugas terlambat (deadline lewat, belum dikumpulkan)
+		$this->db->select('COUNT(t.id) as total');
+		$this->db->from('tugas t');
+		$this->db->join('kelas k', 'k.id = t.kelas_id');
+		$this->db->join('kelas_siswa ks', 'ks.kelas_id = k.id');
+		$this->db->where('ks.siswa_id', $siswa_id);
+		$this->db->where('t.status', 'published');
+		$this->db->where('t.deadline <', date('Y-m-d H:i:s'));
+		$this->db->where("t.id NOT IN (
+			SELECT tugas_id FROM pengumpulan_tugas WHERE siswa_id = $siswa_id
+		)");
+		$result = $this->db->get()->row();
+		$stats['tugas_terlambat'] = $result ? $result->total : 0;
+		
+		// Nilai terbaru
+		$this->db->select('pt.nilai, t.judul, t.max_poin');
+		$this->db->from('pengumpulan_tugas pt');
+		$this->db->join('tugas t', 't.id = pt.tugas_id');
+		$this->db->where('pt.siswa_id', $siswa_id);
+		$this->db->where('pt.nilai IS NOT NULL');
+		$this->db->order_by('pt.graded_at', 'DESC');
+		$this->db->limit(1);
+		$stats['nilai_terbaru'] = $this->db->get()->row();
 		
 		return $stats;
-	}
+	}	
 }

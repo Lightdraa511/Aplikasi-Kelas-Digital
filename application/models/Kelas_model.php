@@ -253,4 +253,16 @@ class Kelas_model extends CI_Model {
         $this->db->where('siswa_id', $siswa_id);
         return $this->db->get('kelas_siswa')->num_rows() > 0;
     }
+
+	// Get tugas for specific kelas (simple)
+	public function get_kelas_tugas($kelas_id, $limit = 5) {
+		$this->db->select('id, judul, deadline, status, max_poin');
+		$this->db->from('tugas');
+		$this->db->where('kelas_id', $kelas_id);
+		$this->db->where('status', 'published');
+		$this->db->order_by('deadline', 'DESC');
+		$this->db->limit($limit);
+		
+		return $this->db->get()->result();
+	}
 }
