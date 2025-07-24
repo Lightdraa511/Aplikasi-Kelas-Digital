@@ -132,13 +132,14 @@ class Tugas extends CI_Controller {
 		$guru_id = $data['user']['user_id'];
 		
 		if ($this->input->method() === 'post') {
+			error_log('POST: ' . print_r($_POST, true));
 			$submission_id = $this->input->post('submission_id');
 			$tugas_id = $this->input->post('tugas_id');
 			$nilai = $this->input->post('nilai');
 			$feedback = $this->input->post('feedback');
 			
 			// Validate
-			if (!$submission_id || !$nilai) {
+			if ($submission_id == '' || !is_numeric($submission_id) || !is_numeric($nilai)) {
 				$this->session->set_flashdata('error', 'Data tidak lengkap!');
 				redirect('guru/tugas/detail/' . $tugas_id);
 				return;

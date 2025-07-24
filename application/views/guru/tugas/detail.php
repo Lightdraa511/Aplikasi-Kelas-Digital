@@ -149,7 +149,7 @@ $this->load->view('templates/sidebar', ['user' => $user]);
                           <td>
                             <button type="button" class="btn btn-primary btn-sm" 
                                     data-toggle="modal" data-target="#gradeModal" 
-                                    data-id="<?= $s->id ?>" 
+                                    data-id="<?= isset($s->id) ? $s->id : '' ?>" 
                                     data-nama="<?= htmlspecialchars($s->nama_lengkap) ?>"
                                     data-nilai="<?= $s->nilai ?>"
                                     data-feedback="<?= htmlspecialchars($s->feedback) ?>">
@@ -251,34 +251,46 @@ $this->load->view('templates/sidebar', ['user' => $user]);
   </div>
 </div>
 
-<script>
-$('#gradeModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    $('#submission_id').val(button.data('id'));
-    $('#student_name').text(button.data('nama'));
-    $('#nilai').val(button.data('nilai') || '');
-    $('#feedback').val(button.data('feedback') || '');
-});
+<?php $this->load->view('templates/footer'); ?>
 
-// Form validation
-$('#gradeForm').on('submit', function(e) {
-    var nilai = $('#nilai').val();
-    var maxPoin = <?= $tugas->max_poin ?>;
-    
-    if (!nilai || nilai === '') {
-        alert('Nilai wajib diisi!');
-        e.preventDefault();
-        return false;
-    }
-    
-    if (parseInt(nilai) < 0 || parseInt(nilai) > maxPoin) {
-        alert('Nilai harus antara 0 sampai ' + maxPoin + '!');
-        e.preventDefault();
-        return false;
-    }
-    
-    return true;
+<!-- Script Modal Penilaian, dipastikan setelah jQuery di-load -->
+<script>
+$(function() {
+  $('#gradeModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      var submissionId = button.data('id');
+      if (!submissionId) {
+          alert('Terjadi kesalahan: ID pengumpulan tugas tidak ditemukan!');
+          return false;
+      }
+      $('#submission_id').val(submissionId);
+      $('#student_name').text(button.data('nama'));
+      $('#nilai').val(button.data('nilai') || '');
+      $('#feedback').val(button.data('feedback') || '');
+  });
+
+  // Form validation
+  $('#gradeForm').on('submit', function(e) {
+      var nilai = $('#nilai').val();
+      var maxPoin = <?= $tugas->max_poin ?>;
+      var submissionId = $('#submission_id').val();
+
+      if (!submissionId) {
+          alert('Terjadi kesalahan: submission_id kosong!');
+          e.preventDefault();
+          return false;
+      }
+      if (!nilai || nilai === '') {
+          alert('Nilai wajib diisi!');
+          e.preventDefault();
+          return false;
+      }
+      if (parseInt(nilai) < 0 || parseInt(nilai) > maxPoin) {
+          alert('Nilai harus antara 0 sampai ' + maxPoin + '!');
+          e.preventDefault();
+          return false;
+      }
+      return true;
+  });
 });
 </script>
-
-<?php $this->load->view('templates/footer'); ?>
