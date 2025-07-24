@@ -36,38 +36,38 @@ $this->load->view('templates/sidebar', ['user' => $user]);
         </div>
       <?php endif; ?>
 
-      <!-- Info boxes -->
-      <div class="row">
-        <div class="col-12 col-sm-6 col-md-4">
-          <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-chalkboard"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Kelas Diajar</span>
-              <span class="info-box-number"><?= $stats['total_kelas'] ?></span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-12 col-sm-6 col-md-4">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-tasks"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Tugas Aktif</span>
-              <span class="info-box-number"><?= $stats['total_tugas_aktif'] ?></span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-12 col-sm-6 col-md-4">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clock"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Menunggu Review</span>
-              <span class="info-box-number">0</span>
-            </div>
-          </div>
-        </div>
-      </div>
+			<!-- Info boxes -->
+			<div class="row">
+				<div class="col-12 col-sm-6 col-md-4">
+					<div class="info-box">
+						<span class="info-box-icon bg-info elevation-1"><i class="fas fa-chalkboard"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Kelas Diajar</span>
+							<span class="info-box-number"><?= $stats['total_kelas'] ?></span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-12 col-sm-6 col-md-4">
+					<div class="info-box mb-3">
+						<span class="info-box-icon bg-success elevation-1"><i class="fas fa-tasks"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Tugas Aktif</span>
+							<span class="info-box-number"><?= $stats['total_tugas_aktif'] ?></span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-12 col-sm-6 col-md-4">
+					<div class="info-box mb-3">
+						<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clock"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Menunggu Review</span>
+							<span class="info-box-number"><?= $stats['pending_review'] ?></span>
+						</div>
+					</div>
+				</div>
+			</div>
 
       <!-- Main row -->
       <div class="row">
@@ -81,7 +81,7 @@ $this->load->view('templates/sidebar', ['user' => $user]);
               </h3>
             </div>
             <div class="card-body">
-			<div class="row">
+							<div class="row">
                 <div class="col-6">
                   <a href="<?= base_url('guru/kelas/create') ?>" class="btn btn-primary btn-block mb-2">
                     <i class="fas fa-plus"></i> Buat Kelas

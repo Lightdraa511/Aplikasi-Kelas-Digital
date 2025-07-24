@@ -28,21 +28,24 @@ class Kelas extends CI_Controller {
     }
     
     // View kelas detail
-    public function detail($id) {
-        $data['user'] = get_user_data();
-        $data['title'] = 'Detail Kelas';
-        $siswa_id = $data['user']['user_id'];
-        
-        // Check if siswa enrolled in this kelas
-        if (!$this->Kelas_model->is_siswa_enrolled($id, $siswa_id)) {
-            $this->session->set_flashdata('error', 'Anda tidak terdaftar di kelas ini!');
-            redirect('siswa/kelas');
-        }
-        
-        $data['kelas'] = $this->Kelas_model->get_kelas_detail($id);
-        $data['students'] = $this->Kelas_model->get_kelas_students($id);
-        $data['stats'] = $this->Kelas_model->get_kelas_stats($id);
-        
-        $this->load->view('siswa/kelas/detail', $data);
-    }
+	public function detail($id) {
+		$data['user'] = get_user_data();
+		$data['title'] = 'Detail Kelas';
+		$siswa_id = $data['user']['user_id'];
+		
+		// Check if siswa enrolled in this kelas
+		if (!$this->Kelas_model->is_siswa_enrolled($id, $siswa_id)) {
+			$this->session->set_flashdata('error', 'Anda tidak terdaftar di kelas ini!');
+			redirect('siswa/kelas');
+		}
+		
+		$data['kelas'] = $this->Kelas_model->get_kelas_detail($id);
+		$data['students'] = $this->Kelas_model->get_kelas_students($id);
+		$data['stats'] = $this->Kelas_model->get_kelas_stats($id);
+		
+		// GET TUGAS UNTUK KELAS INI
+		$data['tugas_list'] = $this->Kelas_model->get_kelas_tugas($id);
+		
+		$this->load->view('siswa/kelas/detail', $data);
+	}
 }

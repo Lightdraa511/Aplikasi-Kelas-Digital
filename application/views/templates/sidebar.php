@@ -33,78 +33,60 @@
             </a>
           </li>
 
-          <?php if($user['role'] == 'super_admin'): ?>
-          <!-- Admin Menu -->
-          <li class="nav-header">ADMINISTRATOR</li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/users') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'users') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-users"></i>
-              <p>Kelola Pengguna</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/periode') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'periode') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>Periode Akademik</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-chalkboard"></i>
-              <p>Monitoring Kelas</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-bar"></i>
-              <p>Laporan</p>
-            </a>
-          </li>
-          
-          <?php elseif($user['role'] == 'guru'): ?>
-          <!-- Guru Menu -->
-          <li class="nav-header">GURU</li>
-          <li class="nav-item">
-            <a href="<?= base_url('guru/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'guru' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-chalkboard"></i>
-              <p>Kelola Kelas</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tasks"></i>
-              <p>Kelola Tugas</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-star"></i>
-              <p>Penilaian</p>
-            </a>
-          </li>
-          
-          <?php elseif($user['role'] == 'siswa'): ?>
-          <!-- Siswa Menu -->
-          <li class="nav-header">SISWA</li>
-          <li class="nav-item">
-            <a href="<?= base_url('siswa/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'siswa' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-book"></i>
-              <p>Kelas Saya</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-clipboard-list"></i>
-              <p>Tugas</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-trophy"></i>
-              <p>Nilai</p>
-            </a>
-          </li>
-          <?php endif; ?>
+					<?php if($user['role'] == 'super_admin'): ?>
+					<!-- Admin Menu -->
+					<li class="nav-header">ADMINISTRATOR</li>
+					<li class="nav-item">
+						<a href="<?= base_url('admin/users') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'users') ? 'active' : '' ?>">
+							<i class="nav-icon fas fa-users"></i>
+							<p>Kelola Pengguna</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url('admin/periode') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'periode') ? 'active' : '' ?>">
+							<i class="nav-icon fas fa-calendar-alt"></i>
+							<p>Periode Akademik</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url('admin/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
+							<i class="nav-icon fas fa-chalkboard"></i>
+							<p>Monitoring Kelas</p>
+						</a>
+					</li>
+										
+					<?php elseif($user['role'] == 'guru'): ?>
+					<!-- Guru Menu -->
+					<li class="nav-header">GURU</li>
+					<li class="nav-item">
+						<a href="<?= base_url('guru/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'guru' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
+							<i class="nav-icon fas fa-chalkboard"></i>
+							<p>Kelola Kelas</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url('guru/tugas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'guru' && $this->uri->segment(2) == 'tugas') ? 'active' : '' ?>">
+							<i class="nav-icon fas fa-tasks"></i>
+							<p>Kelola Tugas</p>
+						</a>
+					</li>
+
+					<?php elseif($user['role'] == 'siswa'): ?>
+					<!-- Siswa Menu -->
+					<li class="nav-header">SISWA</li>
+					<li class="nav-item">
+						<a href="<?= base_url('siswa/kelas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'siswa' && $this->uri->segment(2) == 'kelas') ? 'active' : '' ?>">
+							<i class="nav-icon fas fa-book"></i>
+							<p>Kelas Saya</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url('siswa/tugas') ?>" class="nav-link <?= ($this->uri->segment(1) == 'siswa' && $this->uri->segment(2) == 'tugas') ? 'active' : '' ?>">
+							<i class="nav-icon fas fa-clipboard-list"></i>
+							<p>Tugas</p>
+						</a>
+					</li>
+					<?php endif; ?>
 
           <!-- Common Menu -->
           <li class="nav-header">AKUN</li>

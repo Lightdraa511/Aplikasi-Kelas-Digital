@@ -1,6 +1,6 @@
 <?php
 // =============================================================================
-// 12. VIEW SISWA - application/views/siswa/kelas/detail.php
+// COMPLETE FILE - application/views/siswa/kelas/detail.php
 // =============================================================================
 $this->load->view('templates/header', ['title' => $title, 'user' => $user]);
 $this->load->view('templates/sidebar', ['user' => $user]);
@@ -65,20 +65,80 @@ $this->load->view('templates/sidebar', ['user' => $user]);
             </div>
           </div>
           
-          <!-- Tugas Section (Ready for Phase 5) -->
+          <!-- Tugas Section -->
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <i class="fas fa-tasks"></i> Tugas Terbaru
+                <i class="fas fa-tasks"></i> Tugas Kelas Ini
               </h3>
+              <div class="card-tools">
+                <a href="<?= base_url('siswa/tugas') ?>" class="btn btn-primary btn-sm">
+                  <i class="fas fa-eye"></i> Lihat Semua Tugas
+                </a>
+              </div>
             </div>
             
             <div class="card-body">
-              <div class="text-center py-4">
-                <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
-                <h5 class="text-muted">Belum ada tugas</h5>
-                <p class="text-muted">Tugas dari guru akan muncul di sini</p>
-              </div>
+              <?php if (empty($tugas_list)): ?>
+                <div class="text-center py-4">
+                  <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
+                  <h5 class="text-muted">Belum ada tugas</h5>
+                  <p class="text-muted">Tugas dari guru akan muncul di sini</p>
+                </div>
+              <?php else: ?>
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Judul Tugas</th>
+                        <th>Deadline</th>
+                        <th>Poin</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($tugas_list as $t): ?>
+                        <tr>
+                          <td>
+                            <strong><?= htmlspecialchars($t->judul) ?></strong>
+                          </td>
+                          <td>
+                            <small><?= date('d/m/Y H:i', strtotime($t->deadline)) ?></small>
+                            <?php if (strtotime($t->deadline) < time()): ?>
+                              <br><span class="badge badge-danger badge-sm">Lewat</span>
+                            <?php endif; ?>
+                          </td>
+                          <td><?= $t->max_poin ?></td>
+                          <td>
+                            <?php
+                            // Check submission status (simple query)
+                            $CI =& get_instance();
+                            $CI->db->where('tugas_id', $t->id);
+                            $CI->db->where('siswa_id', get_user_data('user_id'));
+                            $submission = $CI->db->get('pengumpulan_tugas')->row();
+                            ?>
+                            <?php if ($submission): ?>
+                              <?php if ($submission->nilai !== null): ?>
+                                <span class="badge badge-success">Dinilai (<?= $submission->nilai ?>)</span>
+                              <?php else: ?>
+                                <span class="badge badge-info">Dikumpulkan</span>
+                              <?php endif; ?>
+                            <?php else: ?>
+                              <span class="badge badge-warning">Belum</span>
+                            <?php endif; ?>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="text-center mt-3">
+                  <a href="<?= base_url('siswa/tugas') ?>" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-tasks"></i> Lihat Semua Tugas Saya
+                  </a>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
         </div>
